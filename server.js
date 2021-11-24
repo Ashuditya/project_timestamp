@@ -25,6 +25,14 @@ app.get("/api/1451001600000", (req,res)=>{
 });
 app.get("/api/:date", (req,res) => {
   var {date} = req.params;
+
+  try{
+    var d = new Date(date);
+    res.json({"unix": d.getTime(), "utc": d.toUTCString()});
+  }catch(err){
+    res.json({"error": "Invalid Date"});
+    console.error(err);
+  }
   
 });
 app.use("/api", (req,res) => {
