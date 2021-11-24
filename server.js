@@ -28,10 +28,10 @@ app.get("/api/:date", (req,res) => {
   
 });
 app.use("/api", (req,res) => {
-  var curr_date_mill = Math.round((new Date()).getTime() / 100);
+  var curr_date_mill = Math.floor((new Date()));
   var curr_date = new Date();
 
-  res.json({"unix": curr_date_mill.toString(), "utc": curr_date.toUTCString()});
+  res.json({"unix": curr_date_mill, "utc": curr_date.toUTCString()});
 });
 
 
