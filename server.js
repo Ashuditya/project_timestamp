@@ -33,8 +33,9 @@ app.get("/api/:date", (req,res) => {
 });
 app.use("/api", (req,res) => {
   var curr_date_mill = Date.now();
-  var curr_date = Date(Date.now());
-  res.json({"unix": curr_date_mill.toString(), "utc": curr_date.toString()});
+  var curr_date = new Date();
+
+  res.json({"unix": curr_date_mill.toString(), "utc": curr_date.toUTCString()});
 });
 
 
