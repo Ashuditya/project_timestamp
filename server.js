@@ -25,14 +25,10 @@ app.get("/api/1451001600000", (req,res)=>{
 });
 app.get("/api/:date", (req,res) => {
   var {date} = req.params;
-  if (date===""){
-    
-  }else{
-  res.json({"unix": 12});
-  }
+  
 });
 app.use("/api", (req,res) => {
-  var curr_date_mill = Date.now();
+  var curr_date_mill = Math.round((new Date()).getTime() / 1000);
   var curr_date = new Date();
 
   res.json({"unix": curr_date_mill.toString(), "utc": curr_date.toUTCString()});
