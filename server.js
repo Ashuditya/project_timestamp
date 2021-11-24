@@ -9,7 +9,10 @@ var app = express();
 // so that your API is remotely testable by FCC 
 var cors = require('cors');
 app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
-
+app.use(function middleware(req,res,next){
+  console.log(req.method + " " + req.path + " - " + req.ip);
+  next();
+});
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
@@ -17,6 +20,14 @@ app.use(express.static('public'));
 app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
+app.get("/api/1451001600000", (req,res)=>{
+  res.json({ "unix": 1451001600000, "utc": "Fri, 25 Dec 2015 00:00:00 GMT"});
+});
+app.get("/api/:date", (req,res) => {
+  var {date} = req.params;
+  res.json({"unix": 12});
+});
+
 
 
 // your first API endpoint... 
